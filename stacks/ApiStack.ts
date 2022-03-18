@@ -7,7 +7,8 @@ export default class ApiStack extends sst.Stack {
     // Create a HTTP API
     const api = new sst.Api(this, "Api", {
       routes: {
-        "GET /": "src/api.handler",
+        "GET /stocks/{symbol}": "src/stocks/get.handler",
+        "GET /stocks": "src/stocks/list.handler",
       },
     });
 
