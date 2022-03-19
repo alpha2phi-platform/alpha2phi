@@ -1,6 +1,6 @@
 import * as sst from "@serverless-stack/resources";
 
-export default class ApiStack extends sst.Stack {
+export default class RESTStack extends sst.Stack {
   // Public reference
   api: sst.Api;
 
@@ -8,7 +8,7 @@ export default class ApiStack extends sst.Stack {
     super(scope, id, props);
 
     // Create a HTTP API
-    this.api = new sst.Api(this, "Api", {
+    this.api = new sst.Api(this, "rest", {
       defaultFunctionProps: {
         environment: {
           STOCKS_TABLE: process.env.STOCKS_TABLE ?? "undefined",
