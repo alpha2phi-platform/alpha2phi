@@ -6,7 +6,7 @@ export const handler: APIGatewayProxyHandlerV2 = async () => {
   const params: ScanInput = {
     TableName: process.env.STOCKS_TABLE ?? "stocks",
     Select: "ALL_ATTRIBUTES",
-    Limit: 10,
+    // Limit: 10,
   };
 
   const result = await dynamoDb.scan(params);

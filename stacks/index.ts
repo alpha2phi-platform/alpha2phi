@@ -1,4 +1,4 @@
-import ApiStack from "./ApiStack";
+import RESTStack from "./RESTStack";
 import * as sst from "@serverless-stack/resources";
 
 export default function main(app: sst.App): void {
@@ -7,7 +7,5 @@ export default function main(app: sst.App): void {
     runtime: "nodejs14.x",
   });
 
-  new ApiStack(app, "api");
-
-  // Add more stacks
+  // new RESTStack(app, "rest");
 }
