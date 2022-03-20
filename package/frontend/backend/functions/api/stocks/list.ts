@@ -1,10 +1,11 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import dynamoDb from "../../../core/dynamodb";
+import context from "../../../core/context";
 import { ScanInput } from "aws-sdk/clients/dynamodb";
 
 export const handler: APIGatewayProxyHandlerV2 = async () => {
   const params: ScanInput = {
-    TableName: process.env.STOCKS_TABLE ?? "stocks",
+    TableName: context.getResource(process.env.STOCKS_TABLE),
     Select: "ALL_ATTRIBUTES",
     // Limit: 10,
   };

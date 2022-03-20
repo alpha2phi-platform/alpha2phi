@@ -5,7 +5,7 @@ export function ApiStack(props: StackContext) {
   const api = new Api(props.stack, "api", {
     defaultFunctionProps: {
       environment: {
-        STOCKS_TABLE: process.env.STOCKS_TABLE ?? "",
+        STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
       },
     },
     routes: {

@@ -7,6 +7,10 @@ export default function main(app: sst.App): void {
   app.setDefaultFunctionProps({
     runtime: "nodejs14.x",
     srcPath: "backend",
+    environment: {
+      STAGE: app.stage,
+      APP_NAME: app.name,
+    },
   });
 
   if (app.local) app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
