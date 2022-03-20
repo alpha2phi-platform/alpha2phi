@@ -1,6 +1,6 @@
 import Stock from "./stocks/stock";
 import listStocks from "./stocks/list";
-// import get from "./stocks/get;
+import getStockBySymbol from "./stocks/get";
 
 type AppSyncEvent = {
   info: {
@@ -19,8 +19,11 @@ export async function handler(
   switch (event.info.fieldName) {
     case "listStocks":
       return await listStocks();
-    // case "getNoteById":
-    //   return await getNoteById(event.arguments.noteId);
+    case "getStockBySymbol":
+      return await getStockBySymbol(
+        event.arguments.country,
+        event.arguments.symbol
+      );
     default:
       return null;
   }

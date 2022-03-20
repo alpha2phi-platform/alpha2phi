@@ -7,11 +7,12 @@ export default async function get(
   country: string,
   symbol: string
 ): Promise<Stock | undefined> {
+  // Parameters
   const params: GetItemInput = {
     TableName: context.getResource(process.env.STOCKS_TABLE),
     Key: {
-      country: country,
-      symbol: symbol,
+      country: country.toLowerCase(),
+      symbol: symbol.toUpperCase(),
     },
   };
 

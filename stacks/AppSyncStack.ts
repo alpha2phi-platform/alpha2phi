@@ -12,7 +12,7 @@ export function AppSyncStack(props: StackContext) {
       },
     },
     dataSources: {
-      stock: "functions/appsync/appsync.handler",
+      stocks: "functions/appsync/appsync.handler",
     },
     resolvers: {
       "Query    listStocks": "stocks",
