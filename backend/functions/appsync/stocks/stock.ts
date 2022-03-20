@@ -6,3 +6,5 @@ interface Stock {
   isin: string;
   name: string;
 }
+
+export default Stock;
