@@ -1,5 +1,5 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import dynamoDb from "../utils/dynamodb";
+import dynamoDb from "../../../core/dynamodb";
 import { GetItemInput } from "aws-sdk/clients/dynamodb";
 
 export const handler: APIGatewayProxyHandlerV2 = async (event) => {

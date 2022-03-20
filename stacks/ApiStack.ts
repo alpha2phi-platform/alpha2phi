@@ -1,4 +1,4 @@
-import { Api, StackContext, use } from "@serverless-stack/resources";
+import { Api, StackContext } from "@serverless-stack/resources";
 
 export function ApiStack(props: StackContext) {
   // Create a HTTP API
@@ -9,8 +9,8 @@ export function ApiStack(props: StackContext) {
       },
     },
     routes: {
-      "GET /stocks/{country}/{symbol}": "/stocks/get.handler",
-      "GET /stocks": "src/stocks/list.handler",
+      "GET /stocks/{country}/{symbol}": "functions/api/stocks/get.handler",
+      "GET /stocks": "functions/api/stocks/list.handler",
     },
   });
 
@@ -21,4 +21,6 @@ export function ApiStack(props: StackContext) {
   props.stack.addOutputs({
     ApiEndpoint: api.url,
   });
+
+  return api;
 }
