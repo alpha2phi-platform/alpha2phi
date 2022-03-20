@@ -1,7 +1,8 @@
 import { RemovalPolicy } from "aws-cdk-lib";
 import * as sst from "@serverless-stack/resources";
-import { ApiStack } from "./ApiStack";
-import { GraphqlStack } from "./GraphqlStack";
+// import { ApiStack } from "./ApiStack";
+// import { GraphqlStack } from "./GraphqlStack";
+import { AppSyncStack } from "./AppSyncStack";
 
 export default function main(app: sst.App): void {
   // Set default runtime for all functions
@@ -18,5 +19,6 @@ export default function main(app: sst.App): void {
 
   app
     // .stack(ApiStack)
-    .stack(GraphqlStack);
+    // .stack(GraphqlStack);
+    .stack(AppSyncStack);
 }

@@ -1,0 +1,13 @@
+type Stock {
+  country: String!
+  symbol: String!
+  currency: String
+  full_name: String
+  isin: String
+  name: String
+}
+
+type Query {
+  listStocks: [Stock]
+  getStockBySymbol(country: String!, symbol: String!): Stock
+}
