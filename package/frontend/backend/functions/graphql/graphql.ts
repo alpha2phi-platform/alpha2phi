@@ -4,19 +4,26 @@ import {
   Config,
 } from "apollo-server-core";
 import { ApolloServer, gql } from "apollo-server-lambda";
-import { createGQLHandler } from "@serverless-stack/node/graphql";
 
 const IS_LOCAL = !!process.env.IS_LOCAL;
 
 const typeDefs = gql`
   type Query {
     hello: String
+    stocks: String
   }
 `;
 
 const resolvers = {
   Query: {
     hello: () => "Hello, it is working!",
+    stocks: async (parent, args, context, info) => {
+      console.dir(parent);
+      console.dir(args);
+      console.dir(context);
+      console.dir(info);
+      return "hello stocks";
+    },
   },
 };
 
