@@ -1,4 +1,5 @@
-import RESTStack from "./RESTStack";
+// import RESTStack from "./RESTStack";
+import GraphQLStack from "./GraphQLStack";
 import * as sst from "@serverless-stack/resources";
 
 export default function main(app: sst.App): void {
@@ -8,4 +9,5 @@ export default function main(app: sst.App): void {
   });
 
   // new RESTStack(app, "rest");
+  new GraphQLStack(app, "graphql");
 }
