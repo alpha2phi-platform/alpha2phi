@@ -1,19 +1,20 @@
-import * as sst from "@serverless-stack/resources";
+import { GraphQLApi, StackContext } from "@serverless-stack/resources";
 
-export default class GraphQLStack extends sst.Stack {
-  api: sst.GraphQLApi;
+export function GraphqlStack(props: StackContext) {
+  const graphql = new GraphQLApi(props.stack, "graphql", {
+    server: {
+      handler: "functions/graphql/graphql.handler",
+      permissions: ["dynamodb"],
+      environment: {
+        STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
+      },
+    },
+  });
 
-  constructor(scope: sst.App, id: string, props?: sst.StackProps) {
-    super(scope, id, props);
+  // Show the endpoint in the output
+  props.stack.addOutputs({
+    ApiEndpoint: graphql.url,
+  });
 
-    // Create the GraphQL API
-    this.api = new sst.GraphQLApi(this, "graphql", {
-      server: "src/graphql.handler",
-    });
-
-    // Show the API endpoint in output
-    this.addOutputs({
-      ApiEndpoint: this.api.url,
-    });
-  }
+  return graphql;
 }
