@@ -18,7 +18,7 @@ export default function main(app: sst.App): void {
   if (app.local) app.setDefaultRemovalPolicy(RemovalPolicy.DESTROY);
 
   app
-    // .stack(ApiStack)
+    // .stack(ApiStack);
     // .stack(GraphqlStack);
     .stack(AppSyncStack);
 }
