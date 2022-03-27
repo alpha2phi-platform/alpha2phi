@@ -10,5 +10,10 @@ export function FrontendStack(props: StackContext) {
     },
   });
 
+  // Show the endpoint in the output
+  props.stack.addOutputs({
+    ApiEndpoint: graphql.url,
+    SiteUrl: site.url,
+  });
   return site;
 }
