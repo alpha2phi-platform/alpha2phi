@@ -5,7 +5,6 @@ import "./App.css";
 function App() {
   const [count, setCount] = useState(0);
 
-  console.log("GraphQL API ---");
   console.log(import.meta.env.VITE_GRAPHQL_URL);
 
   return (
