@@ -1,29 +1,17 @@
 {
   "name": "alpha2phi",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
   "scripts": {
-    "test": "sst test",
-    "start": "sst start",
-    "build": "sst build",
-    "deploy": "sst deploy",
-    "remove": "sst remove"
-  },
-  "eslintConfig": {
-    "extends": [
-      "serverless-stack"
-    ]
-  },
-  "devDependencies": {
-    "@serverless-stack/cli": "0.69.0",
-    "@serverless-stack/resources": "0.69.0",
-    "@tsconfig/node14": "^1.0.1",
-    "@types/aws-lambda": "^8.10.70",
-    "@types/node": "<15.0.0",
-    "aws-cdk-lib": "2.15.0",
-    "typescript": "4.4.4"
+    "frontend-dev": "yarn workspace frontend dev",
+    "backend-dev": "yarn workspace backend start",
+    "start": "concurrently --kill-others-on-fail 'yarn backend-dev' 'yarn frontend-dev'"
   },
   "dependencies": {
-    "apollo-server-lambda": "^3.6.4"
+    "concurrently": "^7.0.0"
   }
 }

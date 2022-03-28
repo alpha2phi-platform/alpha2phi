@@ -3,7 +3,7 @@ import { AppSyncApi, StackContext } from "@serverless-stack/resources";
 export function AppSyncStack(props: StackContext) {
   const appSync = new AppSyncApi(props.stack, "appsync", {
     graphqlApi: {
-      schema: "graphql/schema.gql",
+      schema: "../graphql/schema.gql",
     },
     defaultFunctionProps: {
       // Pass the table name to the function
