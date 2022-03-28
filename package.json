@@ -4,7 +4,8 @@
   "private": true,
   "workspaces": [
     "backend",
-    "frontend"
+    "frontend",
+    "package/*"
   ],
   "scripts": {
     "frontend-dev": "yarn workspace frontend dev",
@@ -13,5 +14,8 @@
   },
   "dependencies": {
     "concurrently": "^7.0.0"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
   }
 }
