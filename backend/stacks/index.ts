@@ -9,7 +9,7 @@ export default function main(app: sst.App): void {
   // Set default runtime for all functions
   app.setDefaultFunctionProps({
     runtime: "nodejs14.x",
-    srcPath: "backend",
+    srcPath: "./",
     environment: {
       STAGE: app.stage,
       APP_NAME: app.name,
