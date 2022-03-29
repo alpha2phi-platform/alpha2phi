@@ -1,7 +1,0 @@
-{
-  "name": "alpha2phi",
-  "region": "ap-southeast-1",
-  "lint": false,
-  "typeCheck": true,
-  "main": "stacks/index.ts"
-}

@@ -5,7 +5,7 @@
   "workspaces": [
     "backend",
     "frontend",
-    "package/*"
+    "packages/*"
   ],
   "scripts": {
     "frontend-dev": "yarn workspace frontend dev",
