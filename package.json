@@ -8,14 +8,19 @@
     "packages/*"
   ],
   "scripts": {
-    "frontend-dev": "yarn workspace frontend dev",
-    "backend-dev": "yarn workspace backend start",
-    "start": "concurrently --kill-others-on-fail 'yarn backend-dev' 'yarn frontend-dev'"
+    "frontend-dev": "yarn workspace @alpha2phi/frontend dev",
+    "backend-dev": "yarn workspace @alpha2phi/backend start",
+    "start": "concurrently --kill-others-on-fail 'yarn backend-dev' 'yarn frontend-dev'",
+    "codegen": "graphql-codegen --config graphql/codegen.yml"
   },
   "dependencies": {
     "concurrently": "^7.0.0"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "@graphql-codegen/cli": "2.6.2",
+    "graphql": "^16.3.0",
+    "lerna": "^4.0.0",
+    "@graphql-codegen/typescript": "2.4.8",
+    "@graphql-codegen/introspection": "2.1.1"
   }
 }

@@ -1,0 +1,10 @@
+overwrite: true
+schema: " https://r3dyywgeajg7hpkgcib2xsfibu.appsync-api.ap-southeast-1.amazonaw\u001c/graphql"
+documents: null
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - "typescript"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
