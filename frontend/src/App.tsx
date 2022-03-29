@@ -8,13 +8,12 @@ function App() {
 
   console.log(import.meta.env.VITE_GRAPHQL_URL);
 
-  const Stocks = () => {
-    console.log("testng");
-    const { result } = useStocksQuery();
-    console.log("result", result);
+  const listStocks = () => {
+    const { data } = useStocksQuery();
+    console.log("result", data);
   };
 
-  Stocks();
+  listStocks();
 
   return (
     <div className="App">
