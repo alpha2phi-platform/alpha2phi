@@ -6,6 +6,13 @@ import "./index.css";
 
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
+  fetchOptions: () => {
+    return {
+      headers: {
+        "x-api-key": "da2-mgnvbvmb2rgvdpwwhuaixair2y",
+      },
+    };
+  },
 });
 
 ReactDOM.render(
