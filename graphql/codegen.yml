@@ -1,10 +1,12 @@
 overwrite: true
-schema: " https://r3dyywgeajg7hpkgcib2xsfibu.appsync-api.ap-southeast-1.amazonaw\u001c/graphql"
-documents: null
+schema: "graphql/*.gql"
 generates:
-  src/generated/graphql.ts:
+  frontend/src/data/urql.ts:
+    documents:
+      - frontend/src/data/operations.gql
+    config:
+      withHooks: true
     plugins:
-      - "typescript"
-  ./graphql.schema.json:
-    plugins:
-      - "introspection"
+      - typescript
+      - typescript-operations
+      - typescript-urql

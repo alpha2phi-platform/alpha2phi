@@ -1,0 +1,21 @@
+query Stocks {
+  listStocks {
+    country
+    symbol
+    currency
+    full_name
+    isin
+    name
+  }
+}
+
+query Stock {
+  getStockBySymbol($country: String, $symbol: String) {
+    country
+    symbol
+    currency
+    full_name
+    isin
+    name
+  }
+}
