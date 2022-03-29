@@ -9,8 +9,8 @@ query Stocks {
   }
 }
 
-query Stock {
-  getStockBySymbol($country: String, $symbol: String) {
+query Stock($country: String!, $symbol: String!) {
+  getStockBySymbol(country: $country, symbol: $symbol) {
     country
     symbol
     currency
