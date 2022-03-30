@@ -1,16 +1,13 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-import { useStocksQuery } from "./data/urql";
+import { StocksQuery, useStocksQuery } from "./data/urql";
 import "./App.css";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  console.log(import.meta.env.VITE_GRAPHQL_URL);
-
   const listStocks = () => {
-    const { data } = useStocksQuery();
-    console.log("result", data);
+    const { loading, data, error } = useStocksQuery();
   };
 
   listStocks();

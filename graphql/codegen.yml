@@ -2,7 +2,6 @@ overwrite: true
 schema:
   - "graphql/*.gql":
       # headers:
-      #   Authorization: "Bearer da2-mgnvbvmb2rgvdpwwhuaixair2y"
       #   apiKey: "da2-mgnvbvmb2rgvdpwwhuaixair2y"
 generates:
   frontend/src/data/urql.ts:

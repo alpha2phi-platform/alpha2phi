@@ -1,11 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createClient, Provider } from "urql";
+import { createClient, Provider, defaultExchanges } from "urql";
 import App from "./App";
 import "./index.css";
 
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
+  exchanges: defaultExchanges,
   fetchOptions: () => {
     return {
       headers: {
