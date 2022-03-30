@@ -7,7 +7,7 @@ const ListStocks = () => {
   const [{ data, fetching, error }] = useStocksQuery();
 
   if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div>
@@ -29,7 +29,7 @@ const GetStock = ({ country, symbol }) => {
   });
 
   if (fetching) return <p>Loading...</p>;
-  if (error) return <p>Oh no... {error.message}</p>;
+  if (error) return <p>{error.message}</p>;
 
   return (
     <div>
