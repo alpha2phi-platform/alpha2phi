@@ -4,8 +4,6 @@ import { createClient, Provider, defaultExchanges } from "urql";
 import App from "./App";
 import "./index.css";
 
-console.log(import.meta.env.VITE_GRAPHQL_API_KEY);
-
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
   exchanges: defaultExchanges,

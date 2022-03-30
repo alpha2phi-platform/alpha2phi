@@ -1,6 +1,5 @@
-import { useState } from "react";
-import logo from "./logo.svg";
-import { StocksQuery, useStockQuery, useStocksQuery } from "./data/urql";
+import React from "react";
+import { useStockQuery, useStocksQuery } from "./data/urql";
 import "./App.css";
 
 const ListStocks = () => {
