@@ -1,50 +1,48 @@
 import { useState } from "react";
 import logo from "./logo.svg";
-import { StocksQuery, useStocksQuery } from "./data/urql";
+import { StocksQuery, useStockQuery, useStocksQuery } from "./data/urql";
 import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0);
+const ListStocks = () => {
+  const [{ data, fetching, error }] = useStocksQuery();
 
-  const listStocks = () => {
-    const { loading, data, error } = useStocksQuery();
-  };
-
-  listStocks();
+  if (fetching) return <p>Loading...</p>;
+  if (error) return <p>Oh no... {error.message}</p>;
 
   return (
+    <div>
+      {data?.listStocks?.map((stock) => (
+        <div key={stock?.symbol}>
+          {stock?.symbol} - {stock?.name}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const GetStock = ({ country, symbol }) => {
+  const [{ data, fetching, error }] = useStockQuery({
+    variables: {
+      country: country,
+      symbol: symbol,
+    },
+  });
+
+  if (fetching) return <p>Loading...</p>;
+  if (error) return <p>Oh no... {error.message}</p>;
+
+  return (
+    <div>
+      {data?.getStockBySymbol?.symbol} - {data?.getStockBySymbol?.name}
+    </div>
+  );
+};
+
+function App() {
+  return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.tsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {" | "}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
+      <GetStock country="united states" symbol="aapl" />
+      {/* <ListStocks /> */}
     </div>
   );
 }
