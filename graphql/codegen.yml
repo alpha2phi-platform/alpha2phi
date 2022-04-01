@@ -1,0 +1,15 @@
+overwrite: true
+schema:
+  - "graphql/*.gql"
+    # headers:
+    #   apiKey: "da2-mgnvbvmb2rgvdpwwhuaixair2y"
+generates:
+  frontend/src/data/urql.ts:
+    documents:
+      - frontend/src/data/operations.gql
+    config:
+      withHooks: true
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-urql
