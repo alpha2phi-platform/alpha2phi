@@ -11,7 +11,7 @@ import { listStocks } from "./test/mocks/handlers";
 
 const client = createClient({
   url: "http://localhost:4000/graphql",
-  // exchanges: defaultExchanges,
+  exchanges: defaultExchanges,
   fetchOptions: () => {
     return {
       headers: {
