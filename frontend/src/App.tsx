@@ -40,8 +40,8 @@ const GetStock = ({ country, symbol }) => {
 function App() {
   return (
     <div className="App">
-      <GetStock country="united states" symbol="aapl" />
-      {/* <ListStocks /> */}
+      {/* <GetStock country="united states" symbol="aapl" /> */}
+      <ListStocks />
     </div>
   );
 }
