@@ -1,6 +1,6 @@
 import React from "react";
 import { useStockQuery, useStocksQuery } from "./data/urql";
-import "./App.css";
+// import "./App.css";
 
 const ListStocks = () => {
   const [{ data, fetching, error }] = useStocksQuery();
@@ -39,9 +39,8 @@ const GetStock = ({ country, symbol }) => {
 
 function App() {
   return (
-    <div className="App">
-      {/* <GetStock country="united states" symbol="aapl" /> */}
-      <ListStocks />
+    <div className="flex justify-center">
+      <h1 class="text-3xl font-bold text-green-900">Hello tailwindcss!</h1>
     </div>
   );
 }
