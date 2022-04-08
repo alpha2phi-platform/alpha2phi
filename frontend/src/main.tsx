@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { createClient, Provider, defaultExchanges } from "urql";
 import App from "./App";
 import "./index.css";
+import { StyledEngineProvider } from "@mui/material/styles";
+import { CssBaseline } from "@mui/material";
 
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
@@ -19,7 +21,10 @@ const client = createClient({
 ReactDOM.render(
   <React.StrictMode>
     <Provider value={client}>
-      <App />
+      <StyledEngineProvider injectFirst>
+        <CssBaseline />
+        <App />
+      </StyledEngineProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
