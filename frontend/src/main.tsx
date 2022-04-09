@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import { createClient, Provider, defaultExchanges } from "urql";
 import App from "./App";
 import "./index.css";
@@ -18,7 +18,9 @@ const client = createClient({
   },
 });
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(
   <React.StrictMode>
     <Provider value={client}>
       <StyledEngineProvider injectFirst>
@@ -26,6 +28,5 @@ ReactDOM.render(
         <App />
       </StyledEngineProvider>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 );
