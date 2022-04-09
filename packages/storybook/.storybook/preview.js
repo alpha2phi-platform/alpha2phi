@@ -7,3 +7,7 @@ export const parameters = {
     },
   },
 }
+import { addDecorator } from '@storybook/react';
+import { urqlDecorator } from '@urql/storybook-addon';
+
+addDecorator(urqlDecorator);
