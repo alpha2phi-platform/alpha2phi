@@ -25,4 +25,6 @@ yarn-error.log*
 
 frontend/cypress/screenshots/
 frontend/cypress/videos/
+/cypress/videos/
+/cypress/screenshots/
 

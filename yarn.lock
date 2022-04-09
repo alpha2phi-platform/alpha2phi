@@ -1156,7 +1156,7 @@
   resolved "https://registry.yarnpkg.com/@cypress/mount-utils/-/mount-utils-1.0.2.tgz#afbc4f8c350b7cd86edc5ad0db0cbe1e0181edc8"
   integrity sha512-Fn3fdTiyayHoy8Ol0RSu4MlBH2maQ2ZEXeEVKl/zHHXEQpld5HX3vdNLhK5YLij8cLynA4DxOT/nO9iEnIiOXw==
 
-"@cypress/react@^5.12.3":
+"@cypress/react@^5.12.4":
   version "5.12.4"
   resolved "https://registry.yarnpkg.com/@cypress/react/-/react-5.12.4.tgz#c40e2ec7da065b7c5f53df029f9ff5a131c9a8f2"
   integrity sha512-d44InxWKmwQKyCMQT/3n1UplYa39yKEQTPlb2HhXF6ickqtmhxw7kePv00yrJpBc9gy2jUkNUOfCbtt2uz1kUw==
@@ -5588,7 +5588,7 @@ csstype@^3.0.11, csstype@^3.0.2:
   resolved "https://registry.npmjs.org/csstype/-/csstype-3.0.11.tgz"
   integrity sha512-sa6P2wJ+CAbgyy4KFssIb/JNMLxFvKF1pCYCSXS8ZMuqZnMsrxqI2E5sPyoTpxoPU/gVZMzr2zjOfg8GIZOMsw==
 
-cypress@^9.5.0:
+cypress@^9.5.3:
   version "9.5.3"
   resolved "https://registry.yarnpkg.com/cypress/-/cypress-9.5.3.tgz#7c56b50fc1f1aa69ef10b271d895aeb4a1d7999e"
   integrity sha512-ItelIVmqMTnKYbo1JrErhsGgQGjWOxCpHT1TfMvwnIXKXN/OSlPjEK7rbCLYDZhejQL99PmUqul7XORI24Ik0A==
