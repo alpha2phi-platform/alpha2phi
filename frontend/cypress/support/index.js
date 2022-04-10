@@ -13,6 +13,8 @@
 // https://on.cypress.io/configuration
 // ***********************************************************
 
+// import "../plugins/tailwind";
+
 // Import commands.js using ES2015 syntax:
 import "./commands";
 
