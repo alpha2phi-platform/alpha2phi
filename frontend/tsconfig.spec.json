@@ -1,5 +1,0 @@
-{
-  "types": ["cypress"],
-  "extends": "./tsconfig.json",
-  "include": ["**/*.spec.ts", "**/*.spec.tsx"]
-}
