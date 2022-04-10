@@ -4,5 +4,5 @@ import App from "./App";
 
 it("render stocks", () => {
   mount(<App />);
-  // cy.get("a").contains("AAPL");
+  cy.get("a").contains("AAPL");
 });
