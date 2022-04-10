@@ -1478,7 +1478,7 @@
     "@graphql-codegen/plugin-helpers" "^2.3.2"
     tslib "~2.3.0"
 
-"@graphql-codegen/cli@2.6.2":
+"@graphql-codegen/cli@2.6.2", "@graphql-codegen/cli@^2.6.2":
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/cli/-/cli-2.6.2.tgz#a9aa4656141ee0998cae8c7ad7d0bf9ca8e0c9ae"
   integrity sha512-UO75msoVgvLEvfjCezM09cQQqp32+mR8Ma1ACsBpr7nroFvHbgcu2ulx1cMovg4sxDBCsvd9Eq/xOOMpARUxtw==
@@ -3277,15 +3277,16 @@
     node-addon-api "3.2.1"
     node-gyp "8.1.0"
 
-"@serverless-stack/cli@0.69.0":
-  version "0.69.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.69.0.tgz#7b6b070b56f74b8af5190bb8bf4cf7be19810f7a"
-  integrity sha512-7vdm9r1x6RrOEpHRGnTgcQZg5Ov4rvWEmp5aSc0j7DRsfiAGcu8x4Ucrv2rQu0ZZK8/DMLD5HClluIHYB9OUZw==
+"@serverless-stack/cli@0.69.5":
+  version "0.69.5"
+  resolved "https://registry.yarnpkg.com/@serverless-stack/cli/-/cli-0.69.5.tgz#23be748f94a40841ffee530c9013134f5209ed9f"
+  integrity sha512-vGUUEWYo7Z1Btz+ji7R0o/8pm1Vn7azAsNPAvD3ZVeuJK8OxQ2IlTamid6EqdYfbBG04Kbf1KMimd20hYXuvAA==
   dependencies:
     "@aws-cdk/aws-apigatewayv2-alpha" "2.15.0-alpha.0"
+    "@graphql-codegen/cli" "^2.6.2"
     "@serverless-stack/aws-lambda-ric" "^2.0.12"
-    "@serverless-stack/core" "^0.69.0"
-    "@serverless-stack/resources" "^0.69.0"
+    "@serverless-stack/core" "^0.69.5"
+    "@serverless-stack/resources" "^0.69.5"
     aws-cdk "2.15.0"
     aws-cdk-lib "2.15.0"
     aws-sdk "^2.761.0"
@@ -3305,7 +3306,7 @@
     ws "^7.4.0"
     yargs "^15.4.1"
 
-"@serverless-stack/core@^0.69.0", "@serverless-stack/core@^0.69.5":
+"@serverless-stack/core@^0.69.5":
   version "0.69.5"
   resolved "https://registry.yarnpkg.com/@serverless-stack/core/-/core-0.69.5.tgz#a640612dce1888112d13df34e43230ad35989b9d"
   integrity sha512-+7LptmQ0uL3jaiCwEu7PTvRJT5jJwKx/ma9zH7rYfg+Hs9H8fs3UrQn2YPweYNmF3AV9aNJCAnAFPHk76oRavw==
@@ -3342,29 +3343,7 @@
     xstate "4.26.1"
     zod "^3.11.6"
 
-"@serverless-stack/resources@0.69.0":
-  version "0.69.0"
-  resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.69.0.tgz#cf377b356ab3ae10517ff8f25a787a011cdea7d8"
-  integrity sha512-/SqBnHYI1Ab6H+ke3NjzesIwtt1DE15kDQfrTNunDbviXkyNoLMAtACa70kw4scDT8gmIcuRZOcpJ8/yNaDyWg==
-  dependencies:
-    "@aws-cdk/aws-apigatewayv2-alpha" "2.15.0-alpha.0"
-    "@aws-cdk/aws-apigatewayv2-authorizers-alpha" "2.15.0-alpha.0"
-    "@aws-cdk/aws-apigatewayv2-integrations-alpha" "2.15.0-alpha.0"
-    "@aws-cdk/aws-appsync-alpha" "2.15.0-alpha.0"
-    "@graphql-tools/load-files" "^6.3.2"
-    "@graphql-tools/merge" "^6.2.14"
-    "@serverless-stack/core" "^0.69.0"
-    archiver "^5.3.0"
-    aws-cdk-lib "2.15.0"
-    chalk "^4.1.0"
-    constructs "^10.0.29"
-    cross-spawn "^7.0.3"
-    fs-extra "^9.0.1"
-    glob "^7.1.7"
-    graphql "^15.5.1"
-    zip-local "^0.3.4"
-
-"@serverless-stack/resources@^0.69.0":
+"@serverless-stack/resources@0.69.5", "@serverless-stack/resources@^0.69.5":
   version "0.69.5"
   resolved "https://registry.yarnpkg.com/@serverless-stack/resources/-/resources-0.69.5.tgz#f980d0a73c857832207930962bdc12dacb57f5df"
   integrity sha512-3BOqR/v9nmJutWJzfdq726K99Q1RwYnPtoYMWQxDdQqdfLcJ7VaFBI1y+oqXueto86fCLJldG6BeqzTtmy0Trg==
