@@ -1,0 +1,26 @@
+{
+  "name": "storybook",
+  "version": "1.0.0",
+  "description": "Component testing using storybook",
+  "author": "alpha2phi",
+  "license": "MIT",
+  "dependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.9",
+    "@storybook/addon-actions": "^6.4.21",
+    "@storybook/addon-essentials": "^6.4.21",
+    "@storybook/addon-interactions": "^6.4.21",
+    "@storybook/addon-links": "^6.4.21",
+    "@storybook/react": "^6.4.21",
+    "@storybook/testing-library": "^0.0.9",
+    "@urql/storybook-addon": "^1.0.8",
+    "babel-loader": "^8.2.4"
+  },
+  "scripts": {
+    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
+  }
+}

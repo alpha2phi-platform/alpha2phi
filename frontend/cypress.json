@@ -1,0 +1,7 @@
+{
+  "component": {
+    "testFiles": "**/*.spec.{js,ts,jsx,tsx}",
+    "componentFolder": "src"
+  },
+  "port": 4000
+}
