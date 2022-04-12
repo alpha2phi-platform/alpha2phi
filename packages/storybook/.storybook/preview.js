@@ -6,8 +6,8 @@ export const parameters = {
       date: /Date$/,
     },
   },
-}
-import { addDecorator } from '@storybook/react';
-import { urqlDecorator } from '@urql/storybook-addon';
+};
+import { addDecorator } from "@storybook/react";
+import { urqlDecorator } from "@urql/storybook-addon";
 
 addDecorator(urqlDecorator);
