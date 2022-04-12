@@ -20,7 +20,7 @@
     "babel-loader": "^8.2.4"
   },
   "scripts": {
-    "storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "build-storybook": "NODE_OPTIONS=--openssl-legacy-provider build-storybook"
   }
 }
