@@ -130,10 +130,16 @@ context("Tests", () => {
       </Provider>
     );
 
+    // Wait for response and check the data length
     cy.wait("@gqlStocks")
       .its("response.body.data.listStocks")
       .should((listStocks) => {
         expect(listStocks.length).to.be.gte(1);
       });
+
+    // Go to next page
+    cy.get('button[title="Go to next page"]').click();
+
+    cy.contains("GOOGL");
   });
 });
