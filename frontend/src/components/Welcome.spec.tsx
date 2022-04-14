@@ -3,6 +3,6 @@ import { mount } from "@cypress/react";
 import Welcome from "./Welcome";
 
 it("render welcome", () => {
-  mount(<Welcome />);
+  mount(<Welcome name="World" />);
   cy.get("h1").contains("Hello");
 });
