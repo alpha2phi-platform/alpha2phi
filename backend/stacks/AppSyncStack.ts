@@ -36,6 +36,7 @@ export function AppSyncStack(props: StackContext) {
   props.stack.addOutputs({
     ApiEndpoint: appSync.url,
     ApiId: appSync.graphqlApi.apiId,
+    ApiUrl: appSync.graphqlApi.graphqlUrl,
     ApiKey: appSync.graphqlApi.apiKey,
   });
 
