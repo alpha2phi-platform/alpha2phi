@@ -1,6 +1,7 @@
 import Stock from "./stocks/stock";
 import listStocks from "./stocks/list";
 import getStockBySymbol from "./stocks/get";
+import { Context } from "aws-lambda";
 
 type AppSyncEvent = {
   info: {
@@ -14,7 +15,8 @@ type AppSyncEvent = {
 };
 
 export async function handler(
-  event: AppSyncEvent
+  event: AppSyncEvent,
+  context: Context
 ): Promise<Record<string, unknown>[] | Stock | string | null | undefined> {
   switch (event.info.fieldName) {
     case "listStocks":
