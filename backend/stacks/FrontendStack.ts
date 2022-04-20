@@ -7,7 +7,7 @@ export function FrontendStack(props: StackContext) {
     path: "../frontend",
     environment: {
       VITE_GRAPHQL_URL: graphql.url,
-      VITE_GRAPHQL_API_KEY: graphql.graphqlApi.apiKey,
+      // VITE_GRAPHQL_API_KEY: graphql.graphqlApi.apiKey,
     },
     typesPath: "src/types/sst-env.d.ts",
   });

@@ -1,20 +1,24 @@
-import { AppSyncApi, StackContext } from "@serverless-stack/resources";
+import { AppSyncApi, StackContext, use } from "@serverless-stack/resources";
+import * as appsync from "@aws-cdk/aws-appsync-alpha";
+import { AuthStack } from "./AuthStack";
+
 // import * as cdk from "aws-cdk-lib";
-// import * as appsync from "@aws-cdk/aws-appsync-alpha";
 
 export function AppSyncStack(props: StackContext) {
-  const appSync = new AppSyncApi(props.stack, "appsync", {
+  const auth = use(AuthStack);
+
+  const graphqlApi = new AppSyncApi(props.stack, "appsync", {
     graphqlApi: {
       schema: "../graphql/stock.gql",
+      authorizationConfig: {
+        defaultAuthorization: {
+          authorizationType: appsync.AuthorizationType.USER_POOL,
+          userPoolConfig: {
+            userPool: auth?.cognitoUserPool,
+          },
+        },
+      },
     },
-    // authorizationConfig: {
-    //   defaultAuthorization: {
-    //     authorizationType: appsync.AuthorizationType.API_KEY,
-    //     apiKeyConfig: {
-    //       expires: cdk.Expiration.after(cdk.Duration.days(365)),
-    //     },
-    //   },
-    // },
     defaultFunctionProps: {
       // Pass the table name to the function
       environment: {
@@ -30,15 +34,15 @@ export function AppSyncStack(props: StackContext) {
     },
   });
 
-  appSync.attachPermissions(["dynamodb"]);
+  graphqlApi.attachPermissions(["dynamodb"]);
 
   // Show the endpoint in the output
   props.stack.addOutputs({
-    ApiEndpoint: appSync.url,
-    ApiId: appSync.graphqlApi.apiId,
-    ApiUrl: appSync.graphqlApi.graphqlUrl,
-    ApiKey: appSync.graphqlApi.apiKey,
+    ApiEndpoint: graphqlApi.url,
+    ApiId: graphqlApi.graphqlApi.apiId,
+    ApiUrl: graphqlApi.graphqlApi.graphqlUrl,
+    // ApiKey: graphqlApi.graphqlApi.apiKey,
   });
 
-  return appSync;
+  return graphqlApi;
 }
