@@ -6,13 +6,15 @@ import "./index.css";
 import App from "./App";
 import { createClient, Provider, defaultExchanges } from "urql";
 
+console.log("----", import.meta.env.REACT_APP_GRAPHQL_URL);
+
 const client = createClient({
-  url: import.meta.env.VITE_GRAPHQL_URL,
+  url: import.meta.env.REACT_APP_GRAPHQL_URL,
   exchanges: defaultExchanges,
   fetchOptions: () => {
     return {
       headers: {
-        "x-api-key": import.meta.env.VITE_GRAPHQL_API_KEY,
+        "x-api-key": import.meta.env.REACT_APP_GRAPHQL_API_KEY,
       },
     };
   },
