@@ -8,12 +8,12 @@ export function FrontendStack(props: StackContext) {
   const site = new ViteStaticSite(props.stack, "frontend", {
     path: "../frontend",
     environment: {
-      REACT_APP_GRAPHQL_URL: graphql.url,
-      // REACT_APP_GRAPHQL_API_KEY: graphql.graphqlApi.apiKey,
-      REACT_APP_REGION: props.app.region,
-      REACT_APP_USER_POOL_ID: auth.cognitoUserPool?.userPoolId || "",
-      REACT_APP_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-      REACT_APP_USER_POOL_CLIENT_ID:
+      VITE_GRAPHQL_URL: graphql.url,
+      // VITE_GRAPHQL_API_KEY: graphql.graphqlApi.apiKey,
+      VITE_REGION: props.app.region,
+      VITE_USER_POOL_ID: auth.cognitoUserPool?.userPoolId || "",
+      VITE_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
+      VITE_USER_POOL_CLIENT_ID:
         auth.cognitoUserPoolClient?.userPoolClientId || "",
     },
     typesPath: "src/types/sst-env.d.ts",

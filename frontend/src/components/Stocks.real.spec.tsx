@@ -6,13 +6,13 @@ import Stocks from "./Stocks";
 
 context("Stocks real tests", () => {
   beforeEach(() => {
-    cy.intercept("POST", import.meta.env.REACT_APP_GRAPHQL_URL, (req) => {
+    cy.intercept("POST", import.meta.env.VITE_GRAPHQL_URL, (req) => {
       aliasQuery(req, "Stocks");
     });
   });
 
   it("render real stocks", () => {
-    cy.intercept("POST", import.meta.env.REACT_APP_GRAPHQL_URL, (req) => {
+    cy.intercept("POST", import.meta.env.VITE_GRAPHQL_URL, (req) => {
       if (hasOperationName(req, "Stocks")) {
         req.alias = "gqlStocks";
         req.reply(); // Send to destination server
@@ -20,12 +20,12 @@ context("Stocks real tests", () => {
     });
 
     const client = createClient({
-      url: import.meta.env.REACT_APP_GRAPHQL_URL,
+      url: import.meta.env.VITE_GRAPHQL_URL,
       exchanges: defaultExchanges,
       fetchOptions: () => {
         return {
           headers: {
-            "x-api-key": import.meta.env.REACT_APP_GRAPHQL_API_KEY,
+            "x-api-key": import.meta.env.VITE_GRAPHQL_API_KEY,
           },
         };
       },
