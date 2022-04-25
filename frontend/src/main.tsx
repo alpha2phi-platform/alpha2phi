@@ -6,8 +6,6 @@ import "./index.css";
 import App from "./App";
 import { createClient, Provider, defaultExchanges } from "urql";
 
-console.log("----", import.meta.env.VITE_GRAPHQL_URL);
-
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
   exchanges: defaultExchanges,

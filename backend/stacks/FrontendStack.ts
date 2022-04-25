@@ -1,10 +1,17 @@
-import { StackContext, use, ViteStaticSite } from "@serverless-stack/resources";
+import {
+  StackContext,
+  use,
+  Auth,
+  AppSyncApi,
+  ViteStaticSite,
+} from "@serverless-stack/resources";
 import { AppSyncStack } from "./AppSyncStack";
 import { AuthStack } from "./AuthStack";
 
 export function FrontendStack(props: StackContext) {
-  const graphql = use(AppSyncStack);
-  const auth = use(AuthStack);
+  const graphql: AppSyncApi = use(AppSyncStack);
+  const auth: Auth = use(AuthStack);
+
   const site = new ViteStaticSite(props.stack, "frontend", {
     path: "../frontend",
     environment: {
