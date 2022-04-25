@@ -5,6 +5,7 @@ import { CssBaseline } from "@mui/material";
 import "./index.css";
 import App from "./App";
 import { createClient, Provider, defaultExchanges } from "urql";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
@@ -24,7 +25,9 @@ root.render(
     <Provider value={client}>
       <StyledEngineProvider injectFirst>
         <CssBaseline />
-        <App />
+        <Router>
+          <App />
+        </Router>
       </StyledEngineProvider>
     </Provider>
   </React.StrictMode>

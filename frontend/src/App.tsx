@@ -1,10 +1,10 @@
 import React from "react";
-import Stocks from "./components/Stocks";
+import Navigator from "./Navigator";
 
 function App() {
   return (
     <div className="App">
-      <Stocks />;
+      <Navigator />
     </div>
   );
 }
