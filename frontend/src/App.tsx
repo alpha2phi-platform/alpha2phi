@@ -18,7 +18,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navigator from "./Navigator";
-import { mainListItems, secondaryListItems } from "./listItems";
+import { mainMenuItems, subMenuItems } from "./components/SideMenu";
 
 function Copyright(props: any) {
   return (
@@ -29,8 +29,8 @@ function Copyright(props: any) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://github.com/alpha2phi-platform">
+        Alpha2phi Platform
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -125,7 +125,7 @@ function AppContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              Alpha2phi Platform
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -149,9 +149,9 @@ function AppContent() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainMenuItems}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {subMenuItems}
           </List>
         </Drawer>
         <Box
@@ -167,38 +167,11 @@ function AppContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="xl" sx={{ mt: 2, mb: 1, ml: 5, mr: 1 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  {/* <Chart /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    height: 240,
-                  }}
-                >
-                  {/* <Deposits /> */}
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
-                  {/* <Orders /> */}
+                  <Navigator />
                 </Paper>
               </Grid>
             </Grid>
