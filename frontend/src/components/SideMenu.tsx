@@ -4,72 +4,60 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import Login from "@mui/icons-material/Login";
-import Logout from "@mui/icons-material/Logout";
-import AppRegistration from "@mui/icons-material/AppRegistration";
-// import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-// import PeopleIcon from "@mui/icons-material/People";
-// import BarChartIcon from "@mui/icons-material/BarChart";
-// import LayersIcon from "@mui/icons-material/Layers";
-// import AssignmentIcon from "@mui/icons-material/Assignment";
+import LoginIcon from "@mui/icons-material/Login";
+import AppRegistrationIconIcon from "@mui/icons-material/AppRegistration";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
+
+interface ListItemLinkProps {
+  icon?: React.ReactElement;
+  primary: string;
+  to: string;
+}
+
+function ListItemLink(props: ListItemLinkProps) {
+  const { icon, primary, to } = props;
+
+  const renderLink = React.useMemo(
+    () =>
+      React.forwardRef<HTMLAnchorElement, Omit<RouterLinkProps, "to">>(
+        function Link(itemProps, ref) {
+          return (
+            <RouterLink to={to} ref={ref} {...itemProps} role={undefined} />
+          );
+        }
+      ),
+    [to]
+  );
+
+  return (
+    <li>
+      <ListItemButton component={renderLink}>
+        {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
+        <ListItemText primary={primary} />
+      </ListItemButton>
+    </li>
+  );
+}
 
 export const mainMenuItems = (
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    {/* <ListItemButton> */}
-    {/*   <ListItemIcon> */}
-    {/*     <ShoppingCartIcon /> */}
-    {/*   </ListItemIcon> */}
-    {/*   <ListItemText primary="Orders" /> */}
-    {/* </ListItemButton> */}
-    {/* <ListItemButton> */}
-    {/*   <ListItemIcon> */}
-    {/*     <PeopleIcon /> */}
-    {/*   </ListItemIcon> */}
-    {/*   <ListItemText primary="Customers" /> */}
-    {/* </ListItemButton> */}
-    {/* <ListItemButton> */}
-    {/*   <ListItemIcon> */}
-    {/*     <BarChartIcon /> */}
-    {/*   </ListItemIcon> */}
-    {/*   <ListItemText primary="Reports" /> */}
-    {/* </ListItemButton> */}
-    {/* <ListItemButton> */}
-    {/*   <ListItemIcon> */}
-    {/*     <LayersIcon /> */}
-    {/*   </ListItemIcon> */}
-    {/*   <ListItemText primary="Integrations" /> */}
-    {/* </ListItemButton> */}
+    <ListItemLink to="/" primary="Dashboard" icon={<DashboardIcon />} />
   </React.Fragment>
 );
 
 export const subMenuItems = (
   <React.Fragment>
     <ListSubheader component="div" inset>
-	User
+      User
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <Login />
-      </ListItemIcon>
-      <ListItemText primary="Login" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <AppRegistration />
-      </ListItemIcon>
-      <ListItemText primary="Signup" />
-    </ListItemButton>
-    {/* <ListItemButton> */}
-    {/*   <ListItemIcon> */}
-    {/*     <AssignmentIcon /> */}
-    {/*   </ListItemIcon> */}
-    {/*   <ListItemText primary="Year-end sale" /> */}
-    {/* </ListItemButton> */}
+    <ListItemLink to="/login" primary="Login" icon={<LoginIcon />} />
+    <ListItemLink
+      to="/signup"
+      primary="Signup"
+      icon={<AppRegistrationIconIcon />}
+    />
   </React.Fragment>
 );
