@@ -1,6 +1,6 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -12,18 +12,45 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { Auth } from "aws-amplify";
+import { useAppContext } from "../libs/context";
+import { useNavigate } from "react-router-dom";
+import AlertDialog from "../components/AlertDialog";
+// import { onError } from "../libs/errorLib";
 
 const theme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const { userHasAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isError, hasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
+    setIsLoading(true);
+    try {
+      await Auth.signIn(email, password);
+      userHasAuthenticated(true);
+      navigate("/");
+    } catch (e) {
+      setIsLoading(false);
+      hasError(true);
+      setErrorMessage(e.message);
+    }
   };
+
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -35,6 +62,11 @@ export default function Login() {
         }}
       >
         <CssBaseline />
+        <AlertDialog
+          status={isError}
+          message={errorMessage}
+          title={"Login Error"}
+        />
         <Box
           sx={{
             marginTop: 8,
@@ -64,6 +96,7 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -74,19 +107,22 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
+            <LoadingButton
               type="submit"
               fullWidth
               variant="contained"
+              disabled={!validateForm()}
+              loading={isLoading}
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
-            </Button>
+            </LoadingButton>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">

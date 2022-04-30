@@ -5,6 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 import AppRegistrationIconIcon from "@mui/icons-material/AppRegistration";
 import {
   Link as RouterLink,
@@ -48,16 +49,24 @@ export const mainMenuItems = (
   </React.Fragment>
 );
 
-export const subMenuItems = (
-  <React.Fragment>
-    <ListSubheader component="div" inset>
-      User
-    </ListSubheader>
-    <ListItemLink to="/login" primary="Login" icon={<LoginIcon />} />
-    <ListItemLink
-      to="/signup"
-      primary="Signup"
-      icon={<AppRegistrationIconIcon />}
-    />
-  </React.Fragment>
-);
+export const subMenuItems = (isAuthenticated: boolean) => {
+  return (
+    <React.Fragment>
+      <ListSubheader component="div" inset>
+        User
+      </ListSubheader>
+      {isAuthenticated ? (
+        <ListItemLink to="/logout" primary="Logout" icon={<LogoutIcon />} />
+      ) : (
+        <>
+          <ListItemLink to="/login" primary="Login" icon={<LoginIcon />} />
+          <ListItemLink
+            to="/signup"
+            primary="Signup"
+            icon={<AppRegistrationIconIcon />}
+          />
+        </>
+      )}
+    </React.Fragment>
+  );
+};

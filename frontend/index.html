@@ -21,6 +21,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="An investment platform" />
     <meta name="theme-color" content="#ffffff" />
+    <!-- https://github.com/aws-amplify/amplify-js/issues/678# -->
+    <script>
+      if (global === undefined) {
+        var global = window;
+      }
+    </script>
     <title>Alpha2phi Platform</title>
   </head>
   <body>
