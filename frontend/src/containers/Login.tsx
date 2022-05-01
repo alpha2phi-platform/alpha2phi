@@ -63,8 +63,8 @@ export default function Login() {
       >
         <CssBaseline />
         <AlertDialog
-          status={isError}
-          message={errorMessage}
+          status={open}
+          message={"afsdfsdfsdfdsfsdfdsfsdaf"}
           title={"Login Error"}
         />
         <Box
