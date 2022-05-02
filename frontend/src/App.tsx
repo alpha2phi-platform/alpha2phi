@@ -19,7 +19,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navigator from "./Navigator";
 import { mainMenuItems, subMenuItems } from "./components/SideMenu";
 import Copyright from "./components/Copyright";
-import { AppContext, useAppContext } from "./libs/context";
+import { AppContext } from "./libs/context";
 import { Auth } from "aws-amplify";
 
 const drawerWidth = 240;

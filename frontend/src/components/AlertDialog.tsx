@@ -1,17 +1,18 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import { errorContext } from "../libs/errorContext";
 
 export default function AlertDialog(props: {
-  message: string;
   title: string;
-	handleOpen: () => void;
+  context: errorContext;
+  handler: () => void;
 }) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(props.context.hasError);
 
   const handleClose = () => {
     setOpen(false);
@@ -28,7 +29,7 @@ export default function AlertDialog(props: {
         <DialogTitle id="alert-dialog-title">{props.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {props.message}
+            {props.context.message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
