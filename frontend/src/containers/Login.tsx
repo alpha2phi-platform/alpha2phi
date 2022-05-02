@@ -17,19 +17,26 @@ import { useAppContext } from "../libs/context";
 import { useNavigate } from "react-router-dom";
 import AlertDialog from "../components/AlertDialog";
 import { ErrorContext } from "../libs/errorContext";
+import { useFormFields } from "../libs/formHooks";
 
 const theme = createTheme();
 
 export default function Login() {
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
   const [error, setError] = useState<ErrorContext>({ hasError: false });
   const closeDialog = () => {
     setError({ hasError: false });
   };
+
+  function validateForm() {
+    return fields.email.length > 0 && fields.password.length > 0;
+  }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,7 +47,7 @@ export default function Login() {
     // });
     setIsLoading(true);
     try {
-      await Auth.signIn(email, password);
+      await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
       navigate("/");
     } catch (e: unknown) {
@@ -48,10 +55,6 @@ export default function Login() {
       setError({ hasError: true, title: "Login", error: e });
     }
   };
-
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -93,7 +96,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={(e) => setEmail(e.target.value)}
+              value={fields.email}
+              onChange={handleFieldChange}
             />
             <TextField
               margin="normal"
@@ -104,7 +108,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={(e) => setPassword(e.target.value)}
+              value={fields.password}
+              onChange={handleFieldChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
