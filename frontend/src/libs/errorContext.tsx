@@ -3,7 +3,7 @@ import React from "react";
 export type ErrorContext = {
   hasError: boolean;
   title?: string;
-  message?: string;
+  error?: any;
 };
 
 // export function onError(error) {

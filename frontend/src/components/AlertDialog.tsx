@@ -11,6 +11,11 @@ export default function AlertDialog(props: {
   context: ErrorContext;
   onClose: () => void;
 }) {
+  let message = props.context.error?.toString();
+  if (props.context.error instanceof Error && props.context.error?.message) {
+    message = props.context.error.message;
+  }
+
   return (
     <div>
       <Dialog
@@ -22,7 +27,7 @@ export default function AlertDialog(props: {
         <DialogTitle id="alert-dialog-title">{props.context.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {props.context.message}
+            {message}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

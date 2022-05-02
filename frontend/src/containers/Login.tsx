@@ -25,14 +25,10 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<ErrorContext>({
-    hasError: false,
-    title: "",
-    message: "",
-  });
   const navigate = useNavigate();
+  const [error, setError] = useState<ErrorContext>({ hasError: false });
   const closeDialog = () => {
-    setError({ hasError: false, message: "" });
+    setError({ hasError: false });
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -47,9 +43,9 @@ export default function Login() {
       await Auth.signIn(email, password);
       userHasAuthenticated(true);
       navigate("/");
-    } catch (e) {
+    } catch (e: unknown) {
       setIsLoading(false);
-      setError({ hasError: true, title: "Login", message: e.message });
+      setError({ hasError: true, title: "Login", error: e });
     }
   };
 

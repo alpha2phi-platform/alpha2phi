@@ -21,6 +21,8 @@ import { mainMenuItems, subMenuItems } from "./components/SideMenu";
 import Copyright from "./components/Copyright";
 import { AppContext } from "./libs/context";
 import { Auth } from "aws-amplify";
+import AlertDialog from "./components/AlertDialog";
+import { ErrorContext } from "./libs/errorContext";
 
 const drawerWidth = 240;
 
@@ -81,6 +83,12 @@ function AppContent() {
   };
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [error, setError] = useState<ErrorContext>({
+    hasError: false,
+  });
+  const closeDialog = () => {
+    setError({ hasError: false });
+  };
 
   useEffect(() => {
     onLoad();
@@ -90,9 +98,13 @@ function AppContent() {
     try {
       await Auth.currentSession();
       userHasAuthenticated(true);
-    } catch (e) {
+    } catch (e: unknown) {
       if (e !== "No current user") {
-        onError(e);
+        setError({
+          hasError: true,
+          title: "Authentication",
+          error: e,
+        });
       }
     }
     setIsAuthenticating(false);
@@ -104,6 +116,7 @@ function AppContent() {
         <ThemeProvider theme={mdTheme}>
           <Box sx={{ display: "flex" }}>
             <CssBaseline />
+            <AlertDialog context={error} onClose={closeDialog} />
             <AppBar position="absolute" open={open}>
               <Toolbar
                 sx={{
