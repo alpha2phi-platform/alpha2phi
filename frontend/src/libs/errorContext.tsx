@@ -1,7 +1,8 @@
 import React from "react";
 
-export type errorContext = {
+export type ErrorContext = {
   hasError: boolean;
+  title?: string;
   message?: string;
 };
 

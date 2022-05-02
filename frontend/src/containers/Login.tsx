@@ -16,7 +16,7 @@ import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/context";
 import { useNavigate } from "react-router-dom";
 import AlertDialog from "../components/AlertDialog";
-// import { onError } from "../libs/errorLib";
+import { ErrorContext } from "../libs/errorContext";
 
 const theme = createTheme();
 
@@ -25,9 +25,15 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isError, hasError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [error, setError] = useState<ErrorContext>({
+    hasError: false,
+    title: "",
+    message: "",
+  });
   const navigate = useNavigate();
+  const closeDialog = () => {
+    setError({ hasError: false, message: "" });
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -43,8 +49,7 @@ export default function Login() {
       navigate("/");
     } catch (e) {
       setIsLoading(false);
-      hasError(true);
-      setErrorMessage(e.message);
+      setError({ hasError: true, title: "Login", message: e.message });
     }
   };
 
@@ -62,11 +67,7 @@ export default function Login() {
         }}
       >
         <CssBaseline />
-        <AlertDialog
-          open={isError}
-          message={errorMessage}
-          title={"Login Error"}
-        />
+        <AlertDialog context={error} onClose={closeDialog} />
         <Box
           sx={{
             marginTop: 8,
