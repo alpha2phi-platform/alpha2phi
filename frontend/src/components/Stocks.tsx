@@ -30,7 +30,7 @@ const StyledTableRow: React.FC = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function StocksComponent() {
+export default function Stocks() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 

@@ -12,6 +12,7 @@ export default function Navigator() {
       <Route path="/login" element={<Login />} />
       <Route path="/logout" element={<Logout />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/stocks" element={<Signup />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
