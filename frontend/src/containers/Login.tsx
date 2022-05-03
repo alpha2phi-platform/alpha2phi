@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import AlertDialog from "../components/AlertDialog";
 import { ErrorContext } from "../libs/errorContext";
 import { useFormFields } from "../libs/formHooks";
+import { Link as RouterLink } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -127,12 +128,12 @@ export default function Login() {
             </LoadingButton>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link component={RouterLink} to="/forgotpwd">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link component={RouterLink} to="/signup">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

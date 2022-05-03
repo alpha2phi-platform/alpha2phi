@@ -62,7 +62,7 @@ export const subMenuItems = (isAuthenticated: boolean) => {
           <ListItemLink to="/login" primary="Login" icon={<LoginIcon />} />
           <ListItemLink
             to="/signup"
-            primary="Signup"
+            primary="Sign up"
             icon={<AppRegistrationIconIcon />}
           />
         </>
