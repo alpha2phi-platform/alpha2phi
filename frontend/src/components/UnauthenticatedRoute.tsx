@@ -2,7 +2,7 @@ import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import { useAppContext } from "../libs/context";
 
-function querystring(name, url = window.location.href) {
+function querystring(name: string, url = window.location.href) {
   const parsedName = name.replace(/[[]]/g, "\\$&");
   const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, "i");
   const results = regex.exec(url);
@@ -17,13 +17,15 @@ const UnauthenticatedRoute = (props) => {
   const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
 
-  console.log("redirect---", redirect);
-  console.log("isAuthenticated---", isAuthenticated);
-  return !isAuthenticated ? (
-    <Outlet />
-  ) : (
-    <Navigate replace to={redirect ? redirect : "/dashboard"} />
-  );
+  if (!isAuthenticated) {
+    return <Outlet />;
+  } else {
+    if (redirect) {
+      return <Navigate replace to={redirect} />;
+    } else {
+      return <Outlet />;
+    }
+  }
 };
 
 export default UnauthenticatedRoute;

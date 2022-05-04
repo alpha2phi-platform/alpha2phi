@@ -17,12 +17,13 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navigator from "./Navigator";
-import { mainMenuItems, subMenuItems } from "./components/SideMenu";
 import Copyright from "./components/Copyright";
 import { AppContext } from "./libs/context";
 import { Auth } from "aws-amplify";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
+import MainMenu from "./components/MainMenu";
+import SubMenu from "./components/SubMenu";
 
 const drawerWidth = 240;
 
@@ -166,9 +167,9 @@ function AppContent() {
               </Toolbar>
               <Divider />
               <List component="nav">
-                {mainMenuItems(isAuthenticated)}
+                <MainMenu isAuthenticated={isAuthenticated} />
                 <Divider sx={{ my: 1 }} />
-                {subMenuItems(isAuthenticated)}
+                <SubMenu isAuthenticated={isAuthenticated} />
               </List>
             </Drawer>
             <Box
