@@ -12,11 +12,22 @@ const SubMenu = (props: { isAuthenticated: boolean }) => {
         User
       </ListSubheader>
       {props.isAuthenticated ? (
-        <ListItemLink to="/logout" primary="Logout" icon={<LogoutIcon />} />
+        <ListItemLink
+          index={10}
+          to="/logout"
+          primary="Logout"
+          icon={<LogoutIcon />}
+        />
       ) : (
         <>
-          <ListItemLink to="/login" primary="Login" icon={<LoginIcon />} />
           <ListItemLink
+            index={11}
+            to="/login"
+            primary="Login"
+            icon={<LoginIcon />}
+          />
+          <ListItemLink
+            index={12}
             to="/signup"
             primary="Sign up"
             icon={<AppRegistrationIconIcon />}

@@ -6,9 +6,10 @@ import { ListItemLink } from "../libs/formHooks";
 const MainMenu = (props: { isAuthenticated: boolean }) => {
   return (
     <React.Fragment>
-      <ListItemLink to="/" primary="Home" icon={<HomeIcon />} />
+      <ListItemLink index={0} to="/" primary="Home" icon={<HomeIcon />} />
       {props.isAuthenticated && (
         <ListItemLink
+          index={1}
           to="/dashboard"
           primary="Dashboard"
           icon={<DashboardIcon />}
