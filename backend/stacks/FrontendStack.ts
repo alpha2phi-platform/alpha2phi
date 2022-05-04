@@ -16,12 +16,10 @@ export function FrontendStack(props: StackContext) {
     path: "../frontend",
     environment: {
       VITE_GRAPHQL_URL: graphql.url,
-      // VITE_GRAPHQL_API_KEY: graphql.graphqlApi.apiKey,
       VITE_REGION: props.app.region,
-      VITE_USER_POOL_ID: auth.cognitoUserPool?.userPoolId || "",
-      VITE_IDENTITY_POOL_ID: auth.cognitoCfnIdentityPool.ref,
-      VITE_USER_POOL_CLIENT_ID:
-        auth.cognitoUserPoolClient?.userPoolClientId || "",
+      VITE_USER_POOL_ID: auth.userPoolId || "",
+      VITE_IDENTITY_POOL_ID: auth.cognitoIdentityPoolId || "",
+      VITE_USER_POOL_CLIENT_ID: auth.userPoolClientId || "",
     },
     typesPath: "src/types/sst-env.d.ts",
   });
@@ -31,9 +29,9 @@ export function FrontendStack(props: StackContext) {
     ApiEndpoint: graphql.url,
     SiteUrl: site.url,
     Region: props.app.region,
-    UserPoolId: auth.cognitoUserPool?.userPoolId || "",
-    IdentityPoolId: auth.cognitoCfnIdentityPool.ref,
-    UserPoolClientId: auth.cognitoUserPoolClient?.userPoolClientId || "",
+    UserPoolId: auth.userPoolId || "",
+    IdentityPoolId: auth.cognitoIdentityPoolId || "",
+    UserPoolClientId: auth.userPoolClientId || "",
   });
   return site;
 }

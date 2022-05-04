@@ -44,8 +44,8 @@ export function AppSyncStack(props: StackContext) {
   // Show the endpoint in the output
   props.stack.addOutputs({
     ApiEndpoint: graphqlApi.url,
-    ApiId: graphqlApi.graphqlApi.apiId,
-    ApiUrl: graphqlApi.graphqlApi.graphqlUrl,
+    ApiId: graphqlApi.apiId,
+    ApiUrl: graphqlApi.url,
     // ApiKey: graphqlApi.graphqlApi.apiKey,
   });
 

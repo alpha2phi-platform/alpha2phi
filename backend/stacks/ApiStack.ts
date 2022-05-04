@@ -3,9 +3,11 @@ import { Api, StackContext } from "@serverless-stack/resources";
 export function ApiStack(props: StackContext) {
   // Create a HTTP API
   const api = new Api(props.stack, "api", {
-    defaultFunctionProps: {
-      environment: {
-        STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
+    defaults: {
+      function: {
+        environment: {
+          STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
+        },
       },
     },
     routes: {
