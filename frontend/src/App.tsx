@@ -166,7 +166,7 @@ function AppContent() {
               </Toolbar>
               <Divider />
               <List component="nav">
-                {mainMenuItems}
+                {mainMenuItems(isAuthenticated)}
                 <Divider sx={{ my: 1 }} />
                 {subMenuItems(isAuthenticated)}
               </List>

@@ -24,6 +24,7 @@ export function AppSyncStack(props: StackContext) {
       environment: {
         STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
       },
+      timeout: 900,
     },
     dataSources: {
       stocks: "functions/appsync/appsync.handler",

@@ -14,7 +14,6 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/context";
-import { useNavigate } from "react-router-dom";
 import AlertDialog from "../components/AlertDialog";
 import { ErrorContext } from "../libs/errorContext";
 import { useFormFields } from "../libs/formHooks";
@@ -29,7 +28,6 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const navigate = useNavigate();
   const [error, setError] = useState<ErrorContext>({ hasError: false });
   const closeDialog = () => {
     setError({ hasError: false });
@@ -50,7 +48,6 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      navigate("/");
     } catch (e: unknown) {
       setIsLoading(false);
       setError({ hasError: true, title: "Login", error: e });
