@@ -46,7 +46,6 @@ export function AppSyncStack(props: StackContext) {
     ApiEndpoint: graphqlApi.url,
     ApiId: graphqlApi.apiId,
     ApiUrl: graphqlApi.url,
-    // ApiKey: graphqlApi.graphqlApi.apiKey,
   });
 
   return graphqlApi;

@@ -18,6 +18,7 @@ import AlertDialog from "../components/AlertDialog";
 import { ErrorContext } from "../libs/errorContext";
 import { useFormFields } from "../libs/formHooks";
 import { Link as RouterLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -29,6 +30,7 @@ export default function Login() {
     password: "",
   });
   const [error, setError] = useState<ErrorContext>({ hasError: false });
+  const navigate = useNavigate();
   const closeDialog = () => {
     setError({ hasError: false });
   };
@@ -48,6 +50,7 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
+      navigate("/");
     } catch (e: unknown) {
       setIsLoading(false);
       setError({ hasError: true, title: "Login", error: e });

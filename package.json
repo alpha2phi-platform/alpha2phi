@@ -19,15 +19,15 @@
   "devDependencies": {
     "@graphql-codegen/add": "^3.1.1",
     "@graphql-codegen/cli": "2.6.2",
-    "@graphql-codegen/typescript": "^2.4.8",
-    "@graphql-codegen/typescript-operations": "^2.3.5",
-    "@graphql-codegen/typescript-resolvers": "^2.6.1",
-    "@graphql-codegen/typescript-urql": "^3.5.7",
+    "@graphql-codegen/typescript": "^2.4.9",
+    "@graphql-codegen/typescript-operations": "^2.3.6",
+    "@graphql-codegen/typescript-resolvers": "^2.6.2",
+    "@graphql-codegen/typescript-urql": "^3.5.8",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.14.0",
     "eslint-plugin-react": "^7.29.4",
-    "graphql": "^16.3.0",
+    "graphql": "^16.4.0",
     "lerna": "^4.0.0",
     "typescript": "^4.6.4"
   }

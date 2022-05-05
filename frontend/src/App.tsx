@@ -22,8 +22,8 @@ import { AppContext } from "./libs/context";
 import { Auth } from "aws-amplify";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
-import MainMenu from "./components/MainMenu";
-import SubMenu from "./components/SubMenu";
+import SideMenu from "./components/SideMenu";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -90,6 +90,7 @@ function AppContent() {
   const closeDialog = () => {
     setError({ hasError: false });
   };
+  const navigate = useNavigate();
 
   useEffect(() => {
     onLoad();
@@ -109,6 +110,12 @@ function AppContent() {
       }
     }
     setIsAuthenticating(false);
+  }
+
+  async function handleLogout() {
+    await Auth.signOut();
+    userHasAuthenticated(false);
+    navigate("/login");
   }
 
   return (
@@ -167,9 +174,7 @@ function AppContent() {
               </Toolbar>
               <Divider />
               <List component="nav">
-                <MainMenu isAuthenticated={isAuthenticated} />
-                <Divider sx={{ my: 1 }} />
-                <SubMenu isAuthenticated={isAuthenticated} />
+                <SideMenu isAuthenticated={isAuthenticated} />
               </List>
             </Drawer>
             <Box

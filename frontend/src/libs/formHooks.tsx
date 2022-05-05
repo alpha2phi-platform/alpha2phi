@@ -26,18 +26,15 @@ export interface ListItemLinkProps {
   primary: string;
   to: string;
   index: number;
+  selectedIndex: number;
+  onClick: (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    idx: number
+  ) => void;
 }
 
 export function ListItemLink(props: ListItemLinkProps) {
-  const { icon, primary, to, index } = props;
-  const selectedIndex = React.useRef(-1);
-
-  const handleListItemClick = (
-    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    index: number
-  ) => {
-    selectedIndex.current = index;
-  };
+  const { icon, primary, to, index, selectedIndex, onClick } = props;
 
   const renderLink = React.useMemo(
     () =>
@@ -55,8 +52,8 @@ export function ListItemLink(props: ListItemLinkProps) {
     <li>
       <ListItemButton
         component={renderLink}
-        selected={selectedIndex.current === index}
-        onClick={(event) => handleListItemClick(event, index)}
+        selected={selectedIndex === index}
+        onClick={(event) => onClick(event, index)}
       >
         {icon ? <ListItemIcon>{icon}</ListItemIcon> : null}
         <ListItemText primary={primary} />

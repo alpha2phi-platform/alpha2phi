@@ -3,7 +3,7 @@ import { Bucket, StackContext } from "@serverless-stack/resources";
 
 export function StorageStack(props: StackContext) {
   const bucket = new Bucket(props.stack, "storage");
-  bucket.s3Bucket.addCorsRule({
+  bucket.cdk.bucket.addCorsRule({
     allowedMethods: [HttpMethods.PUT],
     allowedOrigins: ["*"],
     allowedHeaders: ["*"],
