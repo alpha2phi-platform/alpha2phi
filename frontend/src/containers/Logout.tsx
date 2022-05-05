@@ -12,8 +12,10 @@ export default function Logout() {
     userHasAuthenticated(false);
     navigate("/login", { replace: true });
   }
+
   useEffect(() => {
     handleLogout();
   }, []);
+
   return <div>Signing off ...</div>;
 }

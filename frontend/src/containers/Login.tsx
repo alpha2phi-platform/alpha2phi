@@ -51,6 +51,8 @@ export default function Login() {
       redirect
         ? navigate(redirect, { replace: true })
         : navigate("/", { replace: true });
+
+      window.location.reload(); // TODO - Refresh the auth state
     } catch (e: unknown) {
       setIsLoading(false);
       setError({ hasError: true, title: "Login", error: e });

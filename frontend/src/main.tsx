@@ -16,7 +16,6 @@ import {
 import { authExchange } from "@urql/exchange-auth";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Amplify, Auth } from "aws-amplify";
-import { useNavigate } from "react-router-dom";
 import config from "./config";
 
 Amplify.configure({
@@ -39,30 +38,31 @@ const REFRESH_TOKEN_MUTATION = gql`
 `;
 
 const getAuth = async ({ authState, mutate }) => {
-  if (!authState) {
-    const session = await Auth.currentSession();
-    const token = session.getAccessToken().getJwtToken();
-    const refreshToken = session.getRefreshToken().getToken();
-    if (token && refreshToken) {
-      return { token, refreshToken };
+  try {
+    if (!authState) {
+      const session = await Auth.currentSession();
+      const token = session.getAccessToken().getJwtToken();
+      const refreshToken = session.getRefreshToken().getToken();
+      if (token && refreshToken) {
+        return { token, refreshToken };
+      }
+      return null;
     }
+    const result = await mutate(REFRESH_TOKEN_MUTATION, {
+      token: authState?.refreshToken,
+    });
+
+    if (result.data?.refreshLogin) {
+      return {
+        token: result.data.refreshLogin.token,
+        refreshToken: result.data.refreshLogin.refreshToken,
+      };
+    }
+
+    return null;
+  } catch (e: unknown) {
     return null;
   }
-  const result = await mutate(REFRESH_TOKEN_MUTATION, {
-    token: authState?.refreshToken,
-  });
-
-  if (result.data?.refreshLogin) {
-    return {
-      token: result.data.refreshLogin.token,
-      refreshToken: result.data.refreshLogin.refreshToken,
-    };
-  }
-
-  const navigate = useNavigate();
-  navigate("/login", { replace: true });
-
-  return null;
 };
 
 const addAuthToOperation = ({ authState, operation }) => {
