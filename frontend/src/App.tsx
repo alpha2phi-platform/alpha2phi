@@ -23,7 +23,6 @@ import { Auth } from "aws-amplify";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
 import SideMenu from "./components/SideMenu";
-import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -90,7 +89,6 @@ function AppContent() {
   const closeDialog = () => {
     setError({ hasError: false });
   };
-  const navigate = useNavigate();
 
   useEffect(() => {
     onLoad();
@@ -110,12 +108,6 @@ function AppContent() {
       }
     }
     setIsAuthenticating(false);
-  }
-
-  async function handleLogout() {
-    await Auth.signOut();
-    userHasAuthenticated(false);
-    navigate("/login");
   }
 
   return (

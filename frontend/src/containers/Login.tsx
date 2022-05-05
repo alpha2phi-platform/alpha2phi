@@ -19,6 +19,7 @@ import { ErrorContext } from "../libs/errorContext";
 import { useFormFields } from "../libs/formHooks";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { querystring } from "../libs/formHooks";
 
 const theme = createTheme();
 
@@ -41,16 +42,15 @@ export default function Login() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
     setIsLoading(true);
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      navigate("/");
+
+      const redirect = querystring("redirect");
+      redirect
+        ? navigate(redirect, { replace: true })
+        : navigate("/", { replace: true });
     } catch (e: unknown) {
       setIsLoading(false);
       setError({ hasError: true, title: "Login", error: e });

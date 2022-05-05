@@ -10,7 +10,7 @@ export default function Logout() {
   async function handleLogout() {
     await Auth.signOut();
     userHasAuthenticated(false);
-    navigate("/login");
+    navigate("/login", { replace: true });
   }
   useEffect(() => {
     handleLogout();

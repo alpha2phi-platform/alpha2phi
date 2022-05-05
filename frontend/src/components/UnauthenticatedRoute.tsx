@@ -1,19 +1,9 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { querystring } from "../libs/formHooks";
 import { useAppContext } from "../libs/context";
 
-function querystring(name: string, url = window.location.href) {
-  const parsedName = name.replace(/[[]]/g, "\\$&");
-  const regex = new RegExp(`[?&]${parsedName}(=([^&#]*)|&|#|$)`, "i");
-  const results = regex.exec(url);
-
-  if (!results || !results[2]) {
-    return false;
-  }
-
-  return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-const UnauthenticatedRoute = (props) => {
+const UnauthenticatedRoute = () => {
   const { isAuthenticated } = useAppContext();
   const redirect = querystring("redirect");
 

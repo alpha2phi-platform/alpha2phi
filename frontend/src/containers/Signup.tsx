@@ -84,7 +84,7 @@ export default function SignUp() {
       await Auth.confirmSignUp(fields.email, fields.confirmationCode);
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
-      navigate("/");
+      navigate("/", { replace: true });
     } catch (e) {
       setError({ hasError: true, title: "Confirmation", error: e });
       setIsLoading(false);

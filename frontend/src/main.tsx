@@ -16,7 +16,6 @@ import {
 import { authExchange } from "@urql/exchange-auth";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Amplify, Auth } from "aws-amplify";
-import { CognitoUser } from "@aws-amplify/auth";
 import { useNavigate } from "react-router-dom";
 import config from "./config";
 
@@ -41,31 +40,19 @@ const REFRESH_TOKEN_MUTATION = gql`
 
 const getAuth = async ({ authState, mutate }) => {
   if (!authState) {
-    const user = await Auth.currentAuthenticatedUser();
-    if (user instanceof CognitoUser) {
-      const cognitoUser = user as CognitoUser;
-      const token = cognitoUser
-        .getSignInUserSession()
-        ?.getAccessToken()
-        ?.getJwtToken();
-      const refreshToken = cognitoUser
-        .getSignInUserSession()
-        ?.getRefreshToken()
-        ?.getToken();
-
-      if (token && refreshToken) {
-        return { token, refreshToken };
-      }
+    const session = await Auth.currentSession();
+    const token = session.getAccessToken().getJwtToken();
+    const refreshToken = session.getRefreshToken().getToken();
+    if (token && refreshToken) {
+      return { token, refreshToken };
     }
     return null;
   }
-
   const result = await mutate(REFRESH_TOKEN_MUTATION, {
     token: authState?.refreshToken,
   });
 
   if (result.data?.refreshLogin) {
-    initialized = new Date().getTime();
     return {
       token: result.data.refreshLogin.token,
       refreshToken: result.data.refreshLogin.refreshToken,
@@ -73,7 +60,7 @@ const getAuth = async ({ authState, mutate }) => {
   }
 
   const navigate = useNavigate();
-  navigate("/login");
+  navigate("/login", { replace: true });
 
   return null;
 };
@@ -100,30 +87,30 @@ const addAuthToOperation = ({ authState, operation }) => {
   });
 };
 
-const didAuthError = ({ error: any }) => {
-  console.log("error---");
-  return error.graphQLErrors.some((e) => e.extensions?.code === "FORBIDDEN");
-};
-
-const willAuthError = ({ operation, authState }) => {
-  if (!authState) {
-    // Detect our login mutation and let this operation through:
-    return !(
-      operation.kind === "mutation" &&
-      // Here we find any mutation definition with the "login" field
-      operation.query.definitions.some((definition) => {
-        return (
-          definition.kind === "OperationDefinition" &&
-          definition.selectionSet.selections.some((node) => {
-            // The field name is just an example, since signup may also be an exception
-            return node.kind === "Field" && node.name.value === "login";
-          })
-        );
-      })
-    );
-  }
-  return false;
-};
+// const didAuthError = ({ error: any }) => {
+//   return error.graphQLErrors.some((e) => e.extensions?.code === "FORBIDDEN");
+// };
+//
+// const willAuthError = ({ operation, authState }) => {
+//
+//   if (!authState) {
+//     // Detect our login mutation and let this operation through:
+//     return !(
+//       operation.kind === "mutation" &&
+//       // Here we find any mutation definition with the "login" field
+//       operation.query.definitions.some((definition) => {
+//         return (
+//           definition.kind === "OperationDefinition" &&
+//           definition.selectionSet.selections.some((node) => {
+//             // The field name is just an example, since signup may also be an exception
+//             return node.kind === "Field" && node.name.value === "login";
+//           })
+//         );
+//       })
+//     );
+//   }
+//   return false;
+// };
 
 const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
@@ -133,8 +120,8 @@ const client = createClient({
     authExchange({
       getAuth,
       addAuthToOperation,
-      didAuthError,
-      willAuthError,
+      // didAuthError,
+      // willAuthError,
     }),
     fetchExchange,
   ],
