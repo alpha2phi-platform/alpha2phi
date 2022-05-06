@@ -7,31 +7,35 @@ import Signup from "./containers/Signup";
 import Dashboard from "./containers/Dashboard";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import { client } from "./libs/auth";
+import { Provider } from "urql";
 
 export default function Navigator() {
   return (
-    <Routes>
-      <Route path="/" element={<UnauthenticatedRoute />}>
-        <Route path="/" element={<Home />} />
-      </Route>
+    <Provider value={client}>
+      <Routes>
+        <Route path="/" element={<UnauthenticatedRoute />}>
+          <Route path="/" element={<Home />} />
+        </Route>
 
-      <Route path="/login" element={<UnauthenticatedRoute />}>
-        <Route path="/login" element={<Login />} />
-      </Route>
+        <Route path="/login" element={<UnauthenticatedRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
 
-      <Route path="/logout" element={<UnauthenticatedRoute />}>
-        <Route path="/logout" element={<Logout />} />
-      </Route>
+        <Route path="/logout" element={<UnauthenticatedRoute />}>
+          <Route path="/logout" element={<Logout />} />
+        </Route>
 
-      <Route path="/signup" element={<UnauthenticatedRoute />}>
-        <Route path="/signup" element={<Signup />} />
-      </Route>
+        <Route path="/signup" element={<UnauthenticatedRoute />}>
+          <Route path="/signup" element={<Signup />} />
+        </Route>
 
-      <Route path="/dashboard" element={<AuthenticatedRoute />}>
-        <Route path="/dashboard" element={<Dashboard />} />
-      </Route>
+        <Route path="/dashboard" element={<AuthenticatedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
 
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Provider>
   );
 }
