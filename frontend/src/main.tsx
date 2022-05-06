@@ -7,6 +7,8 @@ import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Amplify } from "aws-amplify";
 import config from "./config";
+import { client } from "./libs/auth";
+import { Provider } from "urql";
 
 Amplify.configure({
   Auth: {
@@ -24,7 +26,9 @@ root.render(
     <StyledEngineProvider injectFirst>
       <CssBaseline />
       <Router>
-        <App />
+        <Provider value={client}>
+          <App />
+        </Provider>
       </Router>
     </StyledEngineProvider>
   </React.StrictMode>

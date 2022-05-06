@@ -29,15 +29,13 @@ const getAuth = async ({ authState, mutate }) => {
       }
       return null;
     }
+
     const result = await mutate(REFRESH_TOKEN_MUTATION, {
-      token: authState?.refreshToken,
+      refreshToken: authState.refreshToken,
     });
 
-    if (result.data?.refreshLogin) {
-      return {
-        token: result.data.refreshLogin.token,
-        refreshToken: result.data.refreshLogin.refreshToken,
-      };
+    if (result.data?.refreshCredentials) {
+      return result.data.refreshCredentials;
     }
 
     return null;
