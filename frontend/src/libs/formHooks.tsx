@@ -6,7 +6,6 @@ import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
 } from "react-router-dom";
-import { useEffect } from "react";
 
 export function useFormFields(initialState: any) {
   const [fields, setValues] = useState(initialState);
