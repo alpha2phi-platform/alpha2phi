@@ -8,21 +8,26 @@ export function AppSyncStack(props: StackContext) {
   const auth = use(AuthStack);
 
   const graphqlApi = new AppSyncApi(props.stack, "appsync", {
-    graphqlApi: {
-      schema: "../graphql/stock.gql",
-      authorizationConfig: {
-        defaultAuthorization: {
-          authorizationType: appsync.AuthorizationType.USER_POOL,
-          userPoolConfig: {
-            userPool: auth?.cognitoUserPool,
+    schema: "../graphql/stock.gql",
+    cdk: {
+      graphqlApi: {
+        authorizationConfig: {
+          defaultAuthorization: {
+            authorizationType: appsync.AuthorizationType.USER_POOL,
+            userPoolConfig: {
+              userPool: auth?.cdk.userPool,
+            },
           },
         },
       },
     },
-    defaultFunctionProps: {
-      // Pass the table name to the function
-      environment: {
-        STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
+    defaults: {
+      function: {
+        // Pass the table name to the function
+        environment: {
+          STOCKS_TABLE: process.env.STOCKS_TABLE ?? "stocks",
+        },
+        timeout: 900,
       },
     },
     dataSources: {
@@ -39,9 +44,8 @@ export function AppSyncStack(props: StackContext) {
   // Show the endpoint in the output
   props.stack.addOutputs({
     ApiEndpoint: graphqlApi.url,
-    ApiId: graphqlApi.graphqlApi.apiId,
-    ApiUrl: graphqlApi.graphqlApi.graphqlUrl,
-    // ApiKey: graphqlApi.graphqlApi.apiKey,
+    ApiId: graphqlApi.apiId,
+    ApiUrl: graphqlApi.url,
   });
 
   return graphqlApi;
