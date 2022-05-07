@@ -23,6 +23,7 @@ import { Auth } from "aws-amplify";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
 import SideMenu from "./components/SideMenu";
+import { CognitoUserSession } from "amazon-cognito-identity-js";
 
 const drawerWidth = 240;
 
@@ -83,6 +84,8 @@ function AppContent() {
   };
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
+  const [userSession, setUserSession] =
+    useState<CognitoUserSession | null>(null);
   const [error, setError] = useState<ErrorContext>({
     hasError: false,
   });
@@ -112,7 +115,14 @@ function AppContent() {
 
   return (
     !isAuthenticating && (
-      <AppContext.Provider value={{ isAuthenticated, userHasAuthenticated }}>
+      <AppContext.Provider
+        value={{
+          isAuthenticated,
+          userHasAuthenticated,
+          userSession,
+          setUserSession,
+        }}
+      >
         <ThemeProvider theme={mdTheme}>
           <Box sx={{ display: "flex" }}>
             <CssBaseline />

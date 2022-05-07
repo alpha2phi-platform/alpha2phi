@@ -24,7 +24,7 @@ import { querystring } from "../libs/formHooks";
 const theme = createTheme();
 
 export default function Login() {
-  const { userHasAuthenticated } = useAppContext();
+  const { userHasAuthenticated, setUserSession } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
@@ -46,6 +46,8 @@ export default function Login() {
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
+      const userSession = await Auth.currentSession();
+      setUserSession(userSession);
 
       const redirect = querystring("redirect");
       redirect
