@@ -19,11 +19,11 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navigator from "./Navigator";
 import Copyright from "./components/Copyright";
 import { AppContext } from "./libs/context";
-import { Auth } from "aws-amplify";
+// import { Auth } from "aws-amplify";
+import { useCognito } from "@serverless-stack/web";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
 import SideMenu from "./components/SideMenu";
-import { CognitoUserSession } from "amazon-cognito-identity-js";
 
 const drawerWidth = 240;
 
@@ -84,11 +84,10 @@ function AppContent() {
   };
   const [isAuthenticated, userHasAuthenticated] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(true);
-  const [userSession, setUserSession] =
-    useState<CognitoUserSession | null>(null);
   const [error, setError] = useState<ErrorContext>({
     hasError: false,
   });
+  const cognito = useCognito();
   const closeDialog = () => {
     setError({ hasError: false });
   };
@@ -99,8 +98,8 @@ function AppContent() {
 
   async function onLoad() {
     try {
-      await Auth.currentSession();
-      userHasAuthenticated(true);
+      // await Auth.currentSession();
+      if (cognito.session) userHasAuthenticated(true);
     } catch (e: unknown) {
       if (e !== "No current user") {
         setError({
@@ -119,8 +118,6 @@ function AppContent() {
         value={{
           isAuthenticated,
           userHasAuthenticated,
-          userSession,
-          setUserSession,
         }}
       >
         <ThemeProvider theme={mdTheme}>
