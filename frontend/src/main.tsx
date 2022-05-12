@@ -5,15 +5,9 @@ import { CssBaseline } from "@mui/material";
 import "./index.css";
 import App from "./App";
 import { BrowserRouter as Router } from "react-router-dom";
-import config from "./config";
-import { client } from "./libs/auth";
+import { client, cognito } from "./libs/auth";
 import { Provider } from "urql";
-import { Cognito, CognitoProvider } from "@serverless-stack/web";
-
-const cognito = new Cognito({
-  UserPoolId: config.cognito.USER_POOL_ID,
-  ClientId: config.cognito.APP_CLIENT_ID,
-});
+import { CognitoProvider } from "@serverless-stack/web";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
