@@ -35,7 +35,6 @@ const getAuth = async ({ authState, mutate }) => {
 
 const addAuthToOperation = ({ authState, operation }) => {
   const session = cognito.session;
-  console.log("session", session);
   if (!session) {
     return operation;
   }
@@ -63,13 +62,20 @@ const addAuthToOperation = ({ authState, operation }) => {
 
 export const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
-  exchanges: [
-    dedupExchange,
-    cacheExchange,
-    authExchange({
-      getAuth,
-      addAuthToOperation,
-    }),
-    fetchExchange,
-  ],
+  fetchOptions: () => {
+    const token = cognito.session?.getAccessToken().getJwtToken();
+    return {
+      headers: { authorization: token ? `Bearer ${token}` : "" },
+    };
+  },
 });
+//   exchanges: [
+//     dedupExchange,
+//     cacheExchange,
+//     authExchange({
+//       getAuth,
+//       addAuthToOperation,
+//     }),
+//     fetchExchange,
+//   ],
+// });
