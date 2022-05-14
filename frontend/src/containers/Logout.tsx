@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Auth } from "aws-amplify";
+import { useCognito } from "@serverless-stack/web";
 import { useAppContext } from "../libs/context";
 
 export default function Logout() {
   const { userHasAuthenticated } = useAppContext();
   const navigate = useNavigate();
+  const cognito = useCognito();
 
   async function handleLogout() {
-    await Auth.signOut();
+    cognito.user?.signOut();
     userHasAuthenticated(false);
     navigate("/login", { replace: true });
   }

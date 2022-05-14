@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Auth } from "aws-amplify";
 import { useAppContext } from "../libs/context";
 import AlertDialog from "../components/AlertDialog";
 import { ErrorContext } from "../libs/errorContext";
@@ -20,6 +19,7 @@ import { useFormFields } from "../libs/formHooks";
 import { Link as RouterLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { querystring } from "../libs/formHooks";
+import { useCognito } from "@serverless-stack/web";
 
 const theme = createTheme();
 
@@ -32,6 +32,7 @@ export default function Login() {
   });
   const [error, setError] = useState<ErrorContext>({ hasError: false });
   const navigate = useNavigate();
+  const cognito = useCognito();
   const closeDialog = () => {
     setError({ hasError: false });
   };
@@ -44,14 +45,28 @@ export default function Login() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await Auth.signIn(fields.email, fields.password);
-      userHasAuthenticated(true);
+      await cognito
+        .login(fields.email, fields.password)
+        .then(() => {
+          userHasAuthenticated(true);
+          const redirect = querystring("redirect");
+          redirect
+            ? navigate(redirect, { replace: true })
+            : navigate("/", { replace: true });
+        })
+        .catch((e) => {
+          setIsLoading(false);
+          setError({ hasError: true, title: "Login", error: e });
+        });
 
-      const redirect = querystring("redirect");
-      redirect
-        ? navigate(redirect, { replace: true })
-        : navigate("/", { replace: true });
-      navigate(0);
+      // await Auth.signIn(fields.email, fields.password);
+      // userHasAuthenticated(true);
+      //
+      // const redirect = querystring("redirect");
+      // redirect
+      //   ? navigate(redirect, { replace: true })
+      //   : navigate("/", { replace: true });
+      // navigate(0);
     } catch (e: unknown) {
       setIsLoading(false);
       setError({ hasError: true, title: "Login", error: e });
