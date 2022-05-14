@@ -10,7 +10,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Auth } from "aws-amplify";
 import { ISignUpResult } from "amazon-cognito-identity-js";
 import { useAppContext } from "../libs/context";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +18,7 @@ import { ErrorContext } from "../libs/errorContext";
 import { useFormFields } from "../libs/formHooks";
 import { Link as RouterLink } from "react-router-dom";
 import { NewUserType } from "../libs/types";
+import { useCognito } from "@serverless-stack/web";
 
 const theme = createTheme();
 
@@ -33,6 +33,7 @@ export default function SignUp() {
   const [newUser, setNewUser] = useState<ISignUpResult | null>(null);
   const { userHasAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(false);
+  const cognito = useCognito();
 
   const navigate = useNavigate();
   const [error, setError] = useState<ErrorContext>({ hasError: false });
@@ -62,13 +63,17 @@ export default function SignUp() {
         username: fields.email,
         password: fields.password,
       };
-      const signUpResult = await Auth.signUp(newUser);
+      const signUpResult = await cognito.register(
+        newUser.username,
+        newUser.password
+      );
+
       setIsLoading(false);
       setNewUser(signUpResult);
     } catch (e: any) {
       setError({ hasError: true, title: "Signup", error: e });
       if (e.name === "UsernameExistsException") {
-        const signUpResult = await Auth.resendSignUp(fields.email);
+        const signUpResult = await cognito.resend(fields.email);
         setNewUser(signUpResult);
       }
       setIsLoading(false);
@@ -81,8 +86,8 @@ export default function SignUp() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      await Auth.confirmSignUp(fields.email, fields.confirmationCode);
-      await Auth.signIn(fields.email, fields.password);
+      await cognito.confirm(fields.email, fields.confirmationCode);
+      await cognito.login(fields.email, fields.password);
       userHasAuthenticated(true);
       navigate("/", { replace: true });
     } catch (e) {

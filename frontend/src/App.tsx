@@ -19,7 +19,6 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Navigator from "./Navigator";
 import Copyright from "./components/Copyright";
 import { AppContext } from "./libs/context";
-// import { Auth } from "aws-amplify";
 import { useCognito } from "@serverless-stack/web";
 import AlertDialog from "./components/AlertDialog";
 import { ErrorContext } from "./libs/errorContext";
@@ -99,7 +98,9 @@ function AppContent() {
   async function onLoad() {
     try {
       // await Auth.currentSession();
-      if (cognito.session) userHasAuthenticated(true);
+      if (cognito.session) {
+        userHasAuthenticated(true);
+      }
     } catch (e: unknown) {
       if (e !== "No current user") {
         setError({

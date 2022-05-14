@@ -16,21 +16,22 @@ export const cognito = new Cognito({
 });
 
 const getAuth = async ({ authState, mutate }) => {
-  try {
-    if (!authState) {
-      const session = cognito.session;
-      const token = session?.getAccessToken().getJwtToken();
-      const refreshToken = session?.getRefreshToken().getToken();
-      if (token && refreshToken) {
-        return { token, refreshToken };
-      }
-      return null;
-    }
-
-    return null;
-  } catch (e: unknown) {
-    return null;
-  }
+  // try {
+  //   if (!authState) {
+  //     const session = cognito.session;
+  //     const token = session?.getAccessToken().getJwtToken();
+  //     const refreshToken = session?.getRefreshToken().getToken();
+  //     if (token && refreshToken) {
+  //       return { token, refreshToken };
+  //     }
+  //     return null;
+  //   }
+  //
+  //   return null;
+  // } catch (e: unknown) {
+  //   return null;
+  // }
+  return null;
 };
 
 const addAuthToOperation = ({ authState, operation }) => {
@@ -62,20 +63,13 @@ const addAuthToOperation = ({ authState, operation }) => {
 
 export const client = createClient({
   url: import.meta.env.VITE_GRAPHQL_URL,
-  fetchOptions: () => {
-    const token = cognito.session?.getAccessToken().getJwtToken();
-    return {
-      headers: { authorization: token ? `Bearer ${token}` : "" },
-    };
-  },
+  exchanges: [
+    dedupExchange,
+    cacheExchange,
+    authExchange({
+      getAuth,
+      addAuthToOperation,
+    }),
+    fetchExchange,
+  ],
 });
-//   exchanges: [
-//     dedupExchange,
-//     cacheExchange,
-//     authExchange({
-//       getAuth,
-//       addAuthToOperation,
-//     }),
-//     fetchExchange,
-//   ],
-// });
